@@ -12,10 +12,12 @@ class CustomJSONEncoder(JSONEncoder):
                 x
                 for x in dir(obj)
                 if not x.startswith("_")
-                and x != "metadata"
-                and x != "query"
-                and x != "query_class"
-                and x != "registry"
+                and x not in (
+                    "metadata",
+                    "query",
+                    "query_class",
+                    "registry",
+                )
             ]:
                 data = obj.__getattribute__(field)
                 try:
