@@ -1,0 +1,36 @@
+CREATE SCHEMA IF NOT EXISTS jira;
+USE jira;
+
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS attachment;
+DROP TABLE IF EXISTS task;
+
+CREATE TABLE IF NOT EXISTS user (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    salary DECIMAL NOT NULL,
+    name VARCHAR(45),
+    surname VARCHAR(45),
+    position VARCHAR(45),
+    profile VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS task (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    projectId INT NOT NULL,
+    description VARCHAR(45)
+);
+
+CREATE TABLE IF NOT EXISTS comment (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    taskId INT NOT NULL,
+    FOREIGN KEY (taskId) REFERENCES task(id),
+    comment VARCHAR(90)
+);
+
+CREATE TABLE IF NOT EXISTS attachment (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    taskId INT NOT NULL,
+    FOREIGN KEY (taskId) REFERENCES task(id),
+    attachment VARCHAR(90)
+);
